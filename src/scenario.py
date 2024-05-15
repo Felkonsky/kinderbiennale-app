@@ -1,6 +1,6 @@
 __author__ = 'Felix A. Goebel'
 
-import glob
+import glob, os
 from enum import Enum
 
 # Enumeration of scenario names for 'better' code readability
@@ -25,7 +25,7 @@ class Scenario:
         self.image_list = glob.glob(f"**/{scenario}/*")
     
     def __repr__(self) -> str:
-        return f'\tScenario --- {self.name}\n\tPath --- {self.image_list[self.index]}'
+        return f'\t - Scenario: {self.name}\n\t - Image:{os.path.basename(self.image_list[self.index])}'
     
     # Function: return the corresponding scenario of the selected combination set
     def select(selected_set:set[int]) -> object:

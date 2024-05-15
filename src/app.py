@@ -103,18 +103,21 @@ class App(tk.Tk):
             self.label.config(image = photo)
             self.label.image = photo
             self.label.update()
-            alpha += .01
-    
-#    def reset_image(self):
-#        width, height = self.get_app_size()
-#        img = self.RESET_IMAGE.resize((width, height), Image.Resampling.LANCZOS)
-#        photo = ImageTk.PhotoImage(img)
-#        self.label.config(image=photo)
-#        self.label.image = photo
+            alpha += self.get_animation_speed()
 
-    def get_app_size(self):
+    def get_app_size(self) -> tuple[int, int]:
         if self.attributes('-fullscreen'):
             width, height = self.SCREEN_WIDTH, self.SCREEN_HEIGHT
         else:
             width, height = self.MIN_WIDTH, self.MIN_HEIGHT, 
         return width, height
+    
+    # set animation speed accordingly
+    def get_animation_speed(self) -> float:
+        if self.get_app_size()[0] > 2000:
+            return .02
+        elif self.get_app_size()[0] > 1000:
+            return .01
+        else:
+            return .005
+    
