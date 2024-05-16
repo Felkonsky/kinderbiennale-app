@@ -1,6 +1,8 @@
 __author__ = 'Felix A. Goebel'
 
-import log, serial, time
+import serial, time
+
+from log import logging
 from serial.tools import list_ports
 from serial import SerialException
 
@@ -9,25 +11,24 @@ class Controller():
     def __init__(self) -> None:
 
         ports = self.get_ports()
-        log.logging.info(f'Ports -> {ports}')
+        logging.info(f'Ports -> {ports}')
         arduino_port = self.get_arduino_port(ports)
         
         try:
             self.arduino = serial.Serial(port=arduino_port, baudrate=115200, timeout=.1)
         except SerialException:
-            log.logging.error(f'Port {arduino_port} can not be found or configured!')
+            logging.error(f'Port {arduino_port} can not be found or configured!')
         except ValueError:
-            log.logging.error(f'Parameters of Serial Port are out of range!')
+            logging.error(f'Parameters of Serial Port are out of range!')
         except:
-            log.logging.error(f'An error occured when trying to create the port {arduino_port}!')
+            logging.error(f'An error occured when trying to create the port {arduino_port}!')
 
         if self.arduino.port == None:
-           
             self.disconnected = True
-            log.logging.error(f'The Arduino could not be found and/ or configured!')
+            logging.error(f'The Arduino could not be found and/ or configured!')
         else:
             self.disconnected = False
-            log.logging.info(f'The Arduino is listening on port {arduino_port}.')
+            logging.info(f'The Arduino is listening on port {arduino_port}.')
 
 
     # Check for all active ports
@@ -64,15 +65,15 @@ class Controller():
                 self.arduino.port = arduino_port
                 self.arduino.open()
                 if was_connected:
-                    log.logging.info(f"The Arduino reconnected on port {arduino_port}.")
+                    logging.info(f"The Arduino reconnected on port {arduino_port}.")
                 else:
-                    log.logging.info(f"The Arduino is now listening on port {arduino_port}.")
+                    logging.info(f"The Arduino is now listening on port {arduino_port}.")
 
             except SerialException:
-                log.logging.error(f'Can not open Serial Connection on port {arduino_port}')
+                logging.error(f'Can not open Serial Connection on port {arduino_port}')
                 self.arduino.close()
                 self.disconnected = True
             except:
-                log.logging.error(f'Something went wrong while trying to reconnect.')
+                logging.error(f'Something went wrong while trying to reconnect.')
 
  

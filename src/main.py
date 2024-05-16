@@ -1,9 +1,10 @@
 __author__ = 'Felix Goebel'
 
-import log, time
+import time
 
 from app import App
 from controller import Controller
+from log import logging
 from serial import SerialException
 from scenario import *
 
@@ -27,7 +28,7 @@ if __name__ == '__main__':
             # Convert received bytes and add to the combination set
             if port_controller.arduino.in_waiting > 0:
                 selection = ord(port_controller.arduino.readline())
-                log.logging.info(f'Data received -> {selection}')
+                logging.info(f'Data received -> {selection}')
                 combination.add(selection)
             
             # If a combination of two scenarios has been selected, display a corresponding AI image
@@ -40,7 +41,7 @@ if __name__ == '__main__':
         except SerialException:
             # Only log the first disconnection and reset the image
             if port_controller.arduino.is_open:
-                log.logging.error("The Arduino disconnected.")
+                logging.error("The Arduino disconnected.")
                 combination.clear()
                 port_controller.arduino.close()
             # otherwise jsut try to reconnect
@@ -48,7 +49,7 @@ if __name__ == '__main__':
 
         # Debugging
         except:
-            log.logging.error(f"Something else went wrong.")
+            logging.error(f"Something else went wrong.")
 
         # Optional, but recommended since other threads can run during this time
         time.sleep(.01)

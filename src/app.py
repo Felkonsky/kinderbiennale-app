@@ -1,10 +1,11 @@
 __author__ = 'Felix A. Goebel'
 
-import log, time
+import time
 import tkinter as tk
 
-from PIL import ImageTk, Image
 from datetime import datetime
+from log import logging
+from PIL import Image, ImageTk
 from scenario import Scenario
 
 
@@ -39,7 +40,7 @@ class App(tk.Tk):
 
     # Quit on pressing 'x' in the title bar
     def _quit(self):
-        log.logging.info(f'Exiting...')
+        logging.info(f'Exiting...')
         self.running = False
         
         
@@ -61,7 +62,7 @@ class App(tk.Tk):
     # Function: Resizing the window
     def resize_Image(self) -> None:
         width, height = self.get_app_size()
-        log.logging.info(f'Resizing to {width}x{height}')
+        logging.info(f'Resizing to {width}x{height}')
         
         img = self.image.resize((width, height), Image.Resampling.LANCZOS)
         photo = ImageTk.PhotoImage(img)
@@ -70,7 +71,7 @@ class App(tk.Tk):
     
     # Choose a topic
     def choose_topic(self, scenario : Scenario) -> None:
-        log.logging.info(f'Beginning to crossfade...\n{scenario}')
+        logging.info(f'Beginning to crossfade...\n{scenario}')
         width, height = self.get_app_size()
         
         # Reset object/ scenario index if all images have been displayed (display all images inside the ai folders sequentially - largest interval between two identical images -> helps to preserve the illusion that the images are not pre-created)
@@ -91,7 +92,7 @@ class App(tk.Tk):
         
         self.blend_images(resized_image, resized_current_image)
         scenario.index += 1
-        log.logging.info(f'Crossfading and reset completed.')
+        logging.info(f'Crossfading and reset completed.')
 
 
     # Function: Crossfade two AI images
