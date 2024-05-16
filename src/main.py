@@ -41,7 +41,6 @@ if __name__ == '__main__':
             # Only log the first disconnection and reset the image
             if port_controller.arduino.is_open:
                 log.logging.error("The Arduino disconnected.")
-                # app.reset_image()
                 combination.clear()
                 port_controller.arduino.close()
             # otherwise jsut try to reconnect
@@ -49,7 +48,7 @@ if __name__ == '__main__':
 
         # Debugging
         except:
-            log.logging.error("Something else went wrong.")
+            log.logging.error(f"Something else went wrong.")
 
         # Optional, but recommended since other threads can run during this time
         time.sleep(.01)

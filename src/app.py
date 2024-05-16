@@ -27,11 +27,11 @@ class App(tk.Tk):
         self.wm_protocol("WM_DELETE_WINDOW", self._quit)
         
         self.image = self.RESET_IMAGE = Image.open('./images/Canaletto.jpg')
-        self.resized_image = self.image.resize((self.SCREEN_WIDTH, self.SCREEN_HEIGHT), Image.Resampling.LANCZOS)
+        resized_image = self.image.resize((self.SCREEN_WIDTH, self.SCREEN_HEIGHT), Image.Resampling.LANCZOS)
         
-        self.img = ImageTk.PhotoImage(self.resized_image)
+        self.photo = ImageTk.PhotoImage(resized_image)
 
-        self.label = tk.Label(self, image=self.img)
+        self.label = tk.Label(self, image=self.photo)
         self.label.pack()
 
         self.bind('<Key>', self.on_key_press)
