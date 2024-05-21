@@ -22,10 +22,16 @@ class Scenario:
     def __init__(self, scenario) -> None:
         self.name = f"{scenario}"
         self.index = 0
-        self.image_list = glob.glob(f"**/{scenario}/*")
+
+        scenario_names_list = scenario.split("_")
+        pre_sorted_list = []
+        for s in scenario_names_list:
+            pre_sorted_list.append(s[0])
+        folder = "".join(sorted(pre_sorted_list))
+        self.image_list = glob.glob(f"**/{folder}/*")
     
     def __repr__(self) -> str:
-        return f'\t - Scenario: {self.name}\n\t - Image:{os.path.basename(self.image_list[self.index])}'
+        return f'\t - Scenario: {self.name}\n\t - Image: {os.path.basename(self.image_list[self.index])}'
     
     # Function: return the corresponding scenario of the selected combination set
     def select(selected_set:set[int]) -> object:
