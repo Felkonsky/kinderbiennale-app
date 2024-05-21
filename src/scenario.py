@@ -6,14 +6,14 @@ from enum import Enum
 # Enumeration of scenario names for 'better' code readability
 class Scenarios(Enum):
     
-    WARMING = 1
-    FLOODING = 4
-    SPACE = 5
-    MOBILITY = 2
-    ANIMALS = 3
-    POLLUTION = 7
-    NATURE = 6
-    ENERGIES = 8
+    WARMING = 7
+    FLOODING = 1
+    SPACE = 2
+    MOBILITY = 6
+    ANIMALS = 4
+    POLLUTION = 5
+    NATURE = 8
+    ENERGIES = 3
 
 # Scenario based folders for AI images
 # Keep track of images that were already displayed
@@ -28,7 +28,9 @@ class Scenario:
         for s in scenario_names_list:
             pre_sorted_list.append(s[0])
         folder = "".join(sorted(pre_sorted_list))
+
         self.image_list = glob.glob(f"**/{folder}/*")
+        
     
     def __repr__(self) -> str:
         return f'\t - Scenario: {self.name}\n\t - Image: {os.path.basename(self.image_list[self.index])}'
@@ -37,13 +39,14 @@ class Scenario:
     def select(selected_set:set[int]) -> object:
         # transform the given selected set into a string, a list of sorted numbers (key of the dictionary below)
         selection_string = ','.join(map(lambda s: str(s), sorted(selected_set)))
+       
         scenarios = {
-            f"{Scenarios.WARMING.value},{Scenarios.FLOODING.value}": warming_flood,
-            f"{Scenarios.WARMING.value},{Scenarios.SPACE.value}": warming_space,
-            f"{Scenarios.WARMING.value},{Scenarios.MOBILITY.value}": warming_mobility,
-            f"{Scenarios.WARMING.value},{Scenarios.ANIMALS.value}": warming_animals,
-            f"{Scenarios.WARMING.value},{Scenarios.POLLUTION.value}": warming_pollution,
-            f"{Scenarios.WARMING.value},{Scenarios.ENERGIES.value}": warming_energies,
+            f"{Scenarios.FLOODING.value},{Scenarios.WARMING.value}": warming_flood,
+            f"{Scenarios.SPACE.value},{Scenarios.WARMING.value}": warming_space,
+            f"{Scenarios.MOBILITY.value},{Scenarios.WARMING.value}": warming_mobility,
+            f"{Scenarios.ANIMALS.value},{Scenarios.WARMING.value}": warming_animals,
+            f"{Scenarios.POLLUTION.value},{Scenarios.WARMING.value}": warming_pollution,
+            f"{Scenarios.ENERGIES.value},{Scenarios.WARMING.value}": warming_energies,
             f"{Scenarios.WARMING.value},{Scenarios.NATURE.value}": warming_nature,
             f"{Scenarios.FLOODING.value},{Scenarios.SPACE.value}": flood_space,
             f"{Scenarios.FLOODING.value},{Scenarios.MOBILITY.value}": flood_mobility,
@@ -56,14 +59,14 @@ class Scenario:
             f"{Scenarios.SPACE.value},{Scenarios.POLLUTION.value}": space_pollution,
             f"{Scenarios.SPACE.value},{Scenarios.ENERGIES.value}": space_energies,
             f"{Scenarios.SPACE.value},{Scenarios.NATURE.value}": space_nature,
-            f"{Scenarios.MOBILITY.value},{Scenarios.ANIMALS.value}": mobility_animals,
-            f"{Scenarios.MOBILITY.value},{Scenarios.POLLUTION.value}": mobility_pollution,
-            f"{Scenarios.MOBILITY.value},{Scenarios.ENERGIES.value}": mobility_energies,
+            f"{Scenarios.ANIMALS.value},{Scenarios.MOBILITY.value}": mobility_animals,
+            f"{Scenarios.POLLUTION.value},{Scenarios.MOBILITY.value}": mobility_pollution,
+            f"{Scenarios.ENERGIES.value},{Scenarios.MOBILITY.value}": mobility_energies,
             f"{Scenarios.MOBILITY.value},{Scenarios.NATURE.value}": mobility_nature,
             f"{Scenarios.ANIMALS.value},{Scenarios.POLLUTION.value}": animals_pollution,
-            f"{Scenarios.ANIMALS.value},{Scenarios.ENERGIES.value}": animals_energies,
+            f"{Scenarios.ENERGIES.value},{Scenarios.ANIMALS.value}": animals_energies,
             f"{Scenarios.ANIMALS.value},{Scenarios.NATURE.value}": animals_nature,
-            f"{Scenarios.POLLUTION.value},{Scenarios.ENERGIES.value}": pollution_energies,
+            f"{Scenarios.ENERGIES.value},{Scenarios.POLLUTION.value}": pollution_energies,
             f"{Scenarios.POLLUTION.value},{Scenarios.NATURE.value}": pollution_nature,
             f"{Scenarios.ENERGIES.value},{Scenarios.NATURE.value}": energies_nature
         }

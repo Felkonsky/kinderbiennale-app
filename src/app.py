@@ -88,8 +88,7 @@ class App(tk.Tk):
         self.blend_images(resized_current_image, resized_image)  
         end = datetime.now()
         delta_time = (end - start).total_seconds()
-        time.sleep(10.0-(delta_time*2)) # wait for 20 s then reset
-        
+        time.sleep(20.0 - delta_time*2) # wait for 20 s then reset
         self.blend_images(resized_image, resized_current_image)
         scenario.index += 1
         logging.info(f'Crossfading and reset completed.')
@@ -120,5 +119,5 @@ class App(tk.Tk):
         elif self.get_app_size()[0] > 1000:
             return .01
         else:
-            return .005
+            return 0.001
     
