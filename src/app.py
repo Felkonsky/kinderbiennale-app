@@ -74,10 +74,6 @@ class App(tk.Tk):
         logging.info(f'Beginning to crossfade...\n{scenario}')
         width, height = self.get_app_size()
         
-        # Reset object/ scenario index if all images have been displayed (display all images inside the ai folders sequentially - largest interval between two identical images -> helps to preserve the illusion that the images are not pre-created)
-        if scenario.index == len(scenario.image_list):
-            scenario.index = 0
-        
         image = Image.open(scenario.image_list[scenario.index]) # pick an image at the current index (scenario - image list)
         
         resized_image = image.resize((width, height), Image.Resampling.LANCZOS) # resize that image to fit the current screen size 
@@ -91,6 +87,9 @@ class App(tk.Tk):
         time.sleep(20.0 - delta_time*2) # wait for 20 s then reset
         self.blend_images(resized_image, resized_current_image)
         scenario.index += 1
+        # Reset object/ scenario index if all images have been displayed (display all images inside the ai folders sequentially - largest interval between two identical images -> helps to preserve the illusion that the images are not pre-created)
+        if scenario.index == len(scenario.image_list):
+            scenario.index = 0
         logging.info(f'Crossfading and reset completed.')
 
 
