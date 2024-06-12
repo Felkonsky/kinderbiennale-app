@@ -1,6 +1,6 @@
 # Media station "Dresden - Utopia - Dystopia"
 
-<img src="[drawing.jpg](https://japanisches-palais.skd.museum/fileadmin/_processed_/6/0/csm_020624killig178_db49e2398a.jpg)" alt="photograph of the media station" width="200"/>
+<img src="https://japanisches-palais.skd.museum/fileadmin/_processed_/6/0/csm_020624killig178_db49e2398a.jpg" alt="photograph of the media station" width="400" height="auto"/>
 ## General Information
 During the Children's Biennale, local and international artists will transform the Japanisches Palais into a fantastic place that encourages visitors to see, hear, feel, participate and discover. Children, families and visitors are invited to immerse themselves in artistic spheres, become creative themselves and leave their usually passive and contemplative role in the museum. The media station Dresden - Utopia - Dystopia was conceived for the Children's Biennale 2024 in cooperation with the Dresden State Art Collections.
 ### Exhibition
